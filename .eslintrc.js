@@ -23,6 +23,7 @@ module.exports = {
     '*.md',
   ],
   rules: {
+    'no-console': 'warn',
     '@typescript-eslint/no-unused-vars': 'warn',
   },
 };
