@@ -1,9 +1,13 @@
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
+import { Nanum_Myeongjo } from 'next/font/google';
 
 import * as Provider from './provider';
+import './globals.css';
 
-const inter = Inter({ subsets: ['latin'] });
+const nauumMyeongjo = Nanum_Myeongjo({
+  weight: ['400', '700', '800'],
+  subsets: ['latin'],
+});
 
 export const metadata: Metadata = {
   title: 'weather',
@@ -17,8 +21,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>
-        <Provider.ReactQuery>{children}</Provider.ReactQuery>
+      <body className={`${nauumMyeongjo.className} w-full h-screen flex justify-center`}>
+        <Provider.ReactQuery>
+          <div className="w-full max-w-screen-sm h-full">{children}</div>
+        </Provider.ReactQuery>
       </body>
     </html>
   );

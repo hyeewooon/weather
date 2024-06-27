@@ -25,9 +25,7 @@ const location: Record<City, Location> = {
 };
 
 export default function Home() {
-  const { data, error, isLoading, isError, isSuccess } = useGetCurrentInfo(
-    location['seoul'],
-  );
+  useGetCurrentInfo(location['seoul']);
 
   useGetForecastInfo(
     {
@@ -39,9 +37,5 @@ export default function Home() {
     },
   );
 
-  return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      {/* {data.location.name} */}
-    </main>
-  );
+  return <main></main>;
 }
