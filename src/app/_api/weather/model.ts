@@ -1,6 +1,7 @@
 export type Request = {
   key: string;
   q: string;
+  lang: string;
 };
 
 export type ForecastRequest = Request & {
