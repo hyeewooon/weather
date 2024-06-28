@@ -1,3 +1,11 @@
+// 전역 데이터
+export type LocationInfo = {
+  id: string;
+  cityName: string;
+  lat: number;
+  lng: number;
+};
+
 export type Request = {
   key: string;
   q: string;
@@ -57,6 +65,7 @@ type Current = {
   gust_kph: number;
 };
 
+// 현재 날씨 정보 응답값
 export type CurrentResponse = {
   location: Location;
   current: Current;
@@ -145,6 +154,7 @@ type Forecast = {
   forecastday: Forecastday[];
 };
 
+// 중단기 예보 응답값
 export type ForecastResponse = {
   location: Location;
   current: Current;

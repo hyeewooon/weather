@@ -3,6 +3,8 @@
 import useGetCurrentInfo from '../_queries/useGetCurrentInfo';
 import useGetForecastInfo from '../_queries/useGetForecastInfo';
 
+import CurrentInfo from './_components/currentInfo';
+
 type Location = {
   cityName: string;
   lat: number;
@@ -37,5 +39,9 @@ export default function Home() {
     },
   );
 
-  return <main></main>;
+  return (
+    <main className="w-full h-full bg-gray-50">
+      <CurrentInfo />
+    </main>
+  );
 }
