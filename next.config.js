@@ -10,6 +10,12 @@ const nextConfig = {
       },
     ];
   },
+  rewrites: () => [
+    {
+      source: '/main',
+      destination: 'http://api.weatherapi.com',
+    },
+  ],
 };
 
 module.exports = nextConfig;
