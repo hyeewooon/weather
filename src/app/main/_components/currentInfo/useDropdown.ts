@@ -1,8 +1,9 @@
 import { useState } from 'react';
 
 import { useLocationStore } from '@/app/_store/location';
-import type { LocationInfo } from '@/app/_api/weather/model';
 import useStore from '@/app/_hooks/useStore';
+
+import type { LocationInfo } from '@/app/_api/weather/model';
 
 const locationList: LocationInfo[] = [
   {

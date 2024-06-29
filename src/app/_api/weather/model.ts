@@ -65,12 +65,6 @@ type Current = {
   gust_kph: number;
 };
 
-// 현재 날씨 정보 응답값
-export type CurrentResponse = {
-  location: Location;
-  current: Current;
-};
-
 type Day = {
   maxtemp_c: number;
   maxtemp_f: number;
@@ -152,6 +146,12 @@ type Forecastday = {
 
 type Forecast = {
   forecastday: Forecastday[];
+};
+
+// 현재 날씨 정보 응답값
+export type CurrentResponse = {
+  location: Location;
+  current: Current;
 };
 
 // 중단기 예보 응답값

@@ -27,17 +27,17 @@ const location: Record<City, Location> = {
 };
 
 export default function Home() {
-  useGetCurrentInfo(location['seoul']);
+  // useGetCurrentInfo(location['seoul']);
 
-  useGetForecastInfo(
-    {
-      ...location['seoul'],
-      days: 7,
-    },
-    {
-      staleTime: 1000 * 60 * 60 * 4,
-    },
-  );
+  // useGetForecastInfo(
+  //   {
+  //     ...location['seoul'],
+  //     days: 7,
+  //   },
+  //   {
+  //     staleTime: 1000 * 60 * 60 * 4,
+  //   },
+  // );
 
   return (
     <main className="w-full h-full bg-gray-50">
