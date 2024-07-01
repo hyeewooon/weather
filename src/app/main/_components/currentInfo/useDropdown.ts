@@ -1,9 +1,8 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { useLocationStore } from '@/app/_store/location';
-import useStore from '@/app/_hooks/useStore';
 
-import type { LocationInfo } from '@/app/_api/weather/model';
+import type { LocationInfo } from '@/app/_store/location';
 
 const locationList: LocationInfo[] = [
   {
@@ -11,6 +10,12 @@ const locationList: LocationInfo[] = [
     cityName: '서울특별시',
     lat: 37.5519,
     lng: 126.9918,
+  },
+  {
+    id: 'incheon',
+    cityName: '인천광역시',
+    lat: 37.4563,
+    lng: 126.7052,
   },
   {
     id: 'busan',
@@ -21,10 +26,17 @@ const locationList: LocationInfo[] = [
 ];
 
 function useDropdown() {
-  const location = useStore(useLocationStore, (state) => state.location);
+  const location = useLocationStore((state) => state.location);
+  const hasHydrated = useLocationStore((state) => state.hasHydrated);
   const changeLocationInfo = useLocationStore((state) => state.changeLocation);
 
   const [isOpen, setOpen] = useState(false);
+
+  useEffect(() => {
+    if (hasHydrated && location.id === '') {
+      changeLocationInfo(locationList[0]);
+    }
+  }, [hasHydrated, location, changeLocationInfo]);
 
   function changeOpen() {
     setOpen((prev) => !prev);
@@ -37,6 +49,7 @@ function useDropdown() {
 
   return {
     isOpen,
+    isLoading: !hasHydrated,
     location,
     locationList,
     changeOpen,
