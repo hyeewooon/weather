@@ -5,6 +5,7 @@ import { getCurrentInfo } from '../_api/weather';
 import type { CurrentResponse } from '../_api/weather/model';
 
 type LocationInfo = {
+  id: string;
   cityName: string;
   lat: number;
   lng: number;
@@ -16,7 +17,7 @@ function useGetCurrentInfo(
   params: LocationInfo,
   queryOptions?: Omit<
     UseQueryOptions<unknown, Error, CurrentResponse, string[]>,
-    'queryKey' | 'queryFn'
+    'queryKey' | 'queryFn' | 'enabled'
   >,
 ) {
   const query = useQuery({
@@ -28,6 +29,7 @@ function useGetCurrentInfo(
         lang: 'ko',
       });
     },
+    enabled: params.id !== '',
     ...queryOptions,
   });
 

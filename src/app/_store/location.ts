@@ -2,23 +2,31 @@ import { createWithEqualityFn } from 'zustand/traditional';
 import { shallow } from 'zustand/shallow';
 import { persist } from 'zustand/middleware';
 
-import type { LocationInfo } from '../_api/weather/model';
+export type LocationInfo = {
+  id: string;
+  cityName: string;
+  lat: number;
+  lng: number;
+};
 
 type State = {
   location: LocationInfo;
+  hasHydrated: boolean;
 };
 
 type Action = {
+  setHasHydrated: (hasHydrated: boolean) => void;
   changeLocation: (location: LocationInfo) => void;
   reset: () => void;
 };
 
 const initState: State = {
+  hasHydrated: false,
   location: {
-    id: 'seoul',
-    cityName: '서울특별시',
-    lat: 37.5519,
-    lng: 126.9918,
+    id: '',
+    cityName: '',
+    lat: 0,
+    lng: 0,
   },
 };
 
@@ -26,11 +34,18 @@ export const useLocationStore = createWithEqualityFn<State & Action>()(
   persist(
     (set) => ({
       ...initState,
+      setHasHydrated: (hasHydrated) =>
+        set({
+          hasHydrated: hasHydrated,
+        }),
       changeLocation: (location) => set({ location }),
       reset: () => set(initState),
     }),
     {
-      name: 'location-storage',
+      name: 'local-storage-location',
+      onRehydrateStorage: () => (state) => {
+        state?.setHasHydrated(true);
+      },
     },
   ),
   shallow,

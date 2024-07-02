@@ -1,11 +1,3 @@
-// 전역 데이터
-export type LocationInfo = {
-  id: string;
-  cityName: string;
-  lat: number;
-  lng: number;
-};
-
 export type Request = {
   key: string;
   q: string;
@@ -65,7 +57,7 @@ type Current = {
   gust_kph: number;
 };
 
-type Day = {
+export type Day = {
   maxtemp_c: number;
   maxtemp_f: number;
   mintemp_c: number;
@@ -99,9 +91,10 @@ type Astro = {
   is_sun_up: number;
 };
 
-type Hour = {
+export type Hour = {
   time_epoch: number;
   time: string;
+  /** 기온 */
   temp_c: number;
   temp_f: number;
   is_day: number;
@@ -112,6 +105,7 @@ type Hour = {
   wind_dir: string;
   pressure_mb: number;
   pressure_in: number;
+  /** 총 강수량(mm) */
   precip_mm: number;
   precip_in: number;
   snow_cm: number;
@@ -126,6 +120,7 @@ type Hour = {
   dewpoint_c: number;
   dewpoint_f: number;
   will_it_rain: number;
+  /** 강수 확률 */
   chance_of_rain: number;
   will_it_snow: number;
   chance_of_snow: number;
