@@ -68,8 +68,6 @@ function useForecastInfo() {
 
     changeWeelyList(list);
   }
-
-  return {};
 }
 
 export default useForecastInfo;

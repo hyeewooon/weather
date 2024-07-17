@@ -10,12 +10,14 @@ const nextConfig = {
       },
     ];
   },
-  rewrites: () => [
-    {
-      source: '/main',
-      destination: 'http://api.weatherapi.com',
-    },
-  ],
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'cdn.weatherapi.com',
+      },
+    ],
+  },
 };
 
 module.exports = nextConfig;

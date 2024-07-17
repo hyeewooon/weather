@@ -7,7 +7,7 @@ export default function CurrentInfo() {
   const { data, isFetched, weatherInfo } = useCurrentInfo();
 
   return (
-    <section className="flex justify-between h-[120px] p-5">
+    <section className="flex justify-between min-h-[120px] p-5">
       <div className="flex-none">
         <Dropdown />
         <p className="text-[32px]">
