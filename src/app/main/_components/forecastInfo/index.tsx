@@ -4,7 +4,7 @@ import useForecastInfo from './useForecastInfo';
 import WeeklyInfo from './weeklyInfo';
 
 export default function ForecastInfo() {
-  const {} = useForecastInfo();
+  useForecastInfo();
 
   return (
     <section>
