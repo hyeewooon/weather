@@ -15,8 +15,8 @@ export default function CurrentInfo() {
         </p>
       </div>
       {isFetched && (
-        <div className="flex-none max-w-[200px] ml-5 text-end content-end">
-          <p>{data?.current.condition.text}</p>
+        <div className="flex-none max-w-[200px] ml-5 text-end content-end break-words">
+          <p className="break-keep">{data?.current.condition.text}</p>
           {weatherInfo && (
             <p className="relative left-2">
               최고: {weatherInfo.maxtemp_c ?? '-'}° 최저: {weatherInfo.mintemp_c ?? '-'}°
