@@ -1,16 +1,22 @@
-'use client';
+import { Suspense } from 'react';
 
 import HourlyInfo from './hourlyInfo';
-import useForecastInfo from './useForecastInfo';
 import WeeklyInfo from './weeklyInfo';
 
-export default function ForecastInfo() {
-  useForecastInfo();
+import WeeklySkeleton from './skeleton/weeklySkeleton';
 
+export default function ForecastInfo() {
   return (
     <section>
-      <WeeklyInfo />
-      <HourlyInfo />
+      <div className="min-h-[134px] p-5 overflow-y-scroll scrollbar-hide">
+        <Suspense fallback={<WeeklySkeleton />}>
+          <WeeklyInfo />
+        </Suspense>
+      </div>
+
+      <Suspense>
+        <HourlyInfo />
+      </Suspense>
     </section>
   );
 }

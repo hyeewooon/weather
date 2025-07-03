@@ -1,12 +1,13 @@
+'use client';
+
 import Image from 'next/image';
 import useDropdown from './useDropdown';
 
 export default function Dropdown() {
-  const { isOpen, isLoading, location, locationList, changeOpen, changeLocation } =
-    useDropdown();
+  const { isOpen, location, locationList, changeOpen, changeLocation } = useDropdown();
 
   const styles /*tw*/ = {
-    container: 'relative',
+    container: 'relative z-10',
     button: 'flex items-center',
     title: 'min-w-6 mr-2',
     list: 'flex-none p-3 rounded-md bg-white absolute',
@@ -16,9 +17,7 @@ export default function Dropdown() {
   return (
     <div className={styles.container}>
       <button className={styles.button} onClick={changeOpen}>
-        <p className={styles.title}>
-          {isLoading ? '~' : location?.cityName ?? '지역을 선택해주세요.'}
-        </p>
+        <p className={styles.title}>{location?.cityName ?? '지역을 선택해주세요.'}</p>
         <Image src="/images/ico_arrow_down_24.svg" alt="arrow" width={16} height={16} />
       </button>
 

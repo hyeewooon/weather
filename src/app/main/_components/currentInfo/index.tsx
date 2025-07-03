@@ -1,29 +1,28 @@
-'use client';
+import { Suspense } from 'react';
 
 import Dropdown from './dropdown';
-import useCurrentInfo from './useCurrentInfo';
+import Temp from './temp';
+import Summary from './summary';
+
+import TempSkeleton from './skeleton/tempSkeleton';
+import SummarySkeleton from './skeleton/summarySkeleton';
 
 export default function CurrentInfo() {
-  const { data, isFetched, weatherInfo } = useCurrentInfo();
-
   return (
     <section className="flex justify-between min-h-[120px] p-5">
       <div className="flex-none">
         <Dropdown />
-        <p className="text-[32px]">
-          {data?.current.temp_c ? `${data.current.temp_c}°` : ''}
-        </p>
+
+        <Suspense fallback={<TempSkeleton />}>
+          <Temp />
+        </Suspense>
       </div>
-      {isFetched && (
-        <div className="flex-none max-w-[200px] ml-5 text-end content-end break-words">
-          <p className="break-keep">{data?.current.condition.text}</p>
-          {weatherInfo && (
-            <p className="relative left-2">
-              최고: {weatherInfo.maxtemp_c ?? '-'}° 최저: {weatherInfo.mintemp_c ?? '-'}°
-            </p>
-          )}
-        </div>
-      )}
+
+      <div className="flex-none max-w-[200px] ml-5 text-end content-end break-words">
+        <Suspense fallback={<SummarySkeleton />}>
+          <Summary />
+        </Suspense>
+      </div>
     </section>
   );
 }
