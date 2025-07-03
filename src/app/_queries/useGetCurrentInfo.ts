@@ -1,4 +1,4 @@
-import { useQuery, type UseQueryOptions } from '@tanstack/react-query';
+import { useSuspenseQuery, type UseSuspenseQueryOptions } from '@tanstack/react-query';
 
 import { getCurrentInfo } from '../_api/weather';
 
@@ -16,11 +16,11 @@ const API_KEY = process.env.NEXT_PUBLIC_API_KEY;
 function useGetCurrentInfo(
   params: LocationInfo,
   queryOptions?: Omit<
-    UseQueryOptions<unknown, Error, CurrentResponse, string[]>,
+    UseSuspenseQueryOptions<unknown, Error, CurrentResponse, string[]>,
     'queryKey' | 'queryFn' | 'enabled'
   >,
 ) {
-  const query = useQuery({
+  const query = useSuspenseQuery({
     queryKey: ['getCurrent', params.cityName],
     queryFn: () => {
       return getCurrentInfo({
@@ -29,7 +29,6 @@ function useGetCurrentInfo(
         lang: 'ko',
       });
     },
-    enabled: params.id !== '',
     ...queryOptions,
   });
 

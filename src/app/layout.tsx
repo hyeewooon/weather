@@ -23,7 +23,9 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${nauumMyeongjo.className} w-full h-screen flex justify-center`}>
         <Provider.ReactQuery>
-          <div className="w-full max-w-screen-sm h-full">{children}</div>
+          <Provider.Hydrated>
+            <div className="w-full max-w-screen-sm h-full">{children}</div>
+          </Provider.Hydrated>
         </Provider.ReactQuery>
       </body>
     </html>
