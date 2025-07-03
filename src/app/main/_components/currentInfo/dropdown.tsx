@@ -10,7 +10,7 @@ export default function Dropdown() {
     container: 'relative z-10',
     button: 'flex items-center',
     title: 'min-w-6 mr-2',
-    list: 'flex-none p-3 rounded-md bg-white absolute',
+    list: 'flex-none min-w-[135px] p-3 rounded-md bg-white absolute',
     item: 'pb-1 cursor-pointer hover:text-gray-600',
   };
 
