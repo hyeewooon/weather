@@ -11,17 +11,17 @@ export type LocationInfo = {
 
 type State = {
   location: LocationInfo;
-  hasHydrated: boolean;
+  isHydrated: boolean;
 };
 
 type Action = {
-  setHasHydrated: (hasHydrated: boolean) => void;
+  setHydrated: (hasHydrated: boolean) => void;
   changeLocation: (location: LocationInfo) => void;
   reset: () => void;
 };
 
 const initState: State = {
-  hasHydrated: false,
+  isHydrated: false,
   location: {
     id: '',
     cityName: '',
@@ -34,17 +34,21 @@ export const useLocationStore = createWithEqualityFn<State & Action>()(
   persist(
     (set) => ({
       ...initState,
-      setHasHydrated: (hasHydrated) =>
-        set({
-          hasHydrated: hasHydrated,
-        }),
+      setHydrated: (isHydrated) => set({ isHydrated }),
       changeLocation: (location) => set({ location }),
       reset: () => set(initState),
     }),
     {
       name: 'local-storage-location',
-      onRehydrateStorage: () => (state) => {
-        state?.setHasHydrated(true);
+      onRehydrateStorage: () => {
+        console.log('hydration starts');
+
+        return (state, error) => {
+          if (!error) {
+            console.log('hydration finished');
+            state?.setHydrated(true);
+          }
+        };
       },
     },
   ),

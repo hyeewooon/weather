@@ -1,18 +1,27 @@
-import type { Config } from "tailwindcss";
+import type { Config } from 'tailwindcss';
 import plugin from 'tailwindcss/plugin';
 
 const config: Config = {
   content: [
-    "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
+    './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
+    './src/components/**/*.{js,ts,jsx,tsx,mdx}',
+    './src/app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
     extend: {
       backgroundImage: {
-        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "gradient-conic":
-          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+        'gradient-conic':
+          'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+      },
+      keyframes: {
+        'skeleton-shine': {
+          '0%': { left: '-40%' },
+          '100%': { left: '100%' },
+        },
+      },
+      animation: {
+        'skeleton-shine': 'skeleton-shine 1.2s linear infinite',
       },
     },
     fontWeight: {
@@ -33,12 +42,11 @@ const config: Config = {
 
           /* Safari and Chrome */
           '&::-webkit-scrollbar': {
-            display: 'none'
-          }
-        }
-      }
-      )
-    })
+            display: 'none',
+          },
+        },
+      });
+    }),
   ],
 };
 export default config;

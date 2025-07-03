@@ -1,4 +1,4 @@
-import { useQuery, type UseQueryOptions } from '@tanstack/react-query';
+import { useSuspenseQuery, type UseSuspenseQueryOptions } from '@tanstack/react-query';
 
 import { getForecastInfo } from '../_api/weather';
 import { ForecastResponse } from '../_api/weather/model';
@@ -16,11 +16,11 @@ const API_KEY = process.env.NEXT_PUBLIC_API_KEY;
 function useGetForecastInfo(
   params: LocationInfo,
   queryOptions?: Omit<
-    UseQueryOptions<unknown, Error, ForecastResponse, string[]>,
+    UseSuspenseQueryOptions<unknown, Error, ForecastResponse, string[]>,
     'queryKey' | 'queryFn' | 'enabled'
   >,
 ) {
-  const query = useQuery({
+  const query = useSuspenseQuery({
     queryKey: ['getForecast', params.cityName],
     queryFn: () =>
       getForecastInfo({
@@ -29,7 +29,6 @@ function useGetForecastInfo(
         days: params.days,
         lang: 'ko',
       }),
-    enabled: params.id !== '',
     ...queryOptions,
   });
 

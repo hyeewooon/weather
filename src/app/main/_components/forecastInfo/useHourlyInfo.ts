@@ -1,15 +1,19 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
+import { getHours } from 'date-fns';
 
 import { useLocationStore } from '@/app/_store/location';
 import { useHourlyWeatherStore, type HourlyInfo } from '@/app/_store/hourlyWeather';
-import { useWeeklyWeatherStore, type WeeklyInfo } from '@/app/_store/weeklyWeather';
 import useGetForecastInfo from '@/app/_queries/useGetForecastInfo';
 
-function useForecastInfo() {
+function useHourlyInfo() {
   const location = useLocationStore((state) => state.location);
-  const changeHourlyList = useHourlyWeatherStore((state) => state.changeList);
-  const changeWeelyList = useWeeklyWeatherStore((state) => state.changeList);
 
+  const list = useHourlyWeatherStore((state) => state.list);
+  const changeHourlyList = useHourlyWeatherStore((state) => state.changeList);
+
+  const currentHour = useRef(getHours(new Date()) ?? 0);
+
+  // 7일간의 주간 예보 데이터
   const { data: forecastInfo } = useGetForecastInfo(
     {
       ...location,
@@ -20,12 +24,12 @@ function useForecastInfo() {
 
   useEffect(() => {
     getHourly();
-    getWeekly();
   }, [forecastInfo]);
 
   function getHourly() {
     if (!forecastInfo) return;
 
+    // 오늘과 내일의 시간별 예보
     const forecastList = [
       ...forecastInfo.forecast.forecastday[0].hour,
       ...forecastInfo.forecast.forecastday[1].hour,
@@ -48,26 +52,9 @@ function useForecastInfo() {
     changeHourlyList(list);
   }
 
-  function getWeekly() {
-    if (!forecastInfo) return;
-
-    const list = forecastInfo.forecast.forecastday.reduce((acc: WeeklyInfo[], cur) => {
-      return [
-        ...acc,
-        {
-          date: cur.date,
-          maxtemp_c: cur.day.maxtemp_c,
-          mintemp_c: cur.day.mintemp_c,
-          avgtemp_c: cur.day.avgtemp_c,
-          totalprecip_mm: cur.day.totalprecip_mm,
-          daily_chance_of_rain: cur.day.daily_chance_of_rain,
-          condition: cur.day.condition,
-        },
-      ];
-    }, []);
-
-    changeWeelyList(list);
-  }
+  // 현재 시간부터 12시간치의 시간별 예보
+  // 예: 현재 시간이 9시라면 9시~20시까지의 데이터만 사용
+  return { list: list.slice(currentHour.current, currentHour.current + 12) };
 }
 
-export default useForecastInfo;
+export default useHourlyInfo;

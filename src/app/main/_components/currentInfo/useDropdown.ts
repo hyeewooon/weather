@@ -27,16 +27,15 @@ const locationList: LocationInfo[] = [
 
 function useDropdown() {
   const location = useLocationStore((state) => state.location);
-  const hasHydrated = useLocationStore((state) => state.hasHydrated);
   const changeLocationInfo = useLocationStore((state) => state.changeLocation);
 
   const [isOpen, setOpen] = useState(false);
 
   useEffect(() => {
-    if (hasHydrated && location.id === '') {
+    if (location.id === '') {
       changeLocationInfo(locationList[0]);
     }
-  }, [hasHydrated, location, changeLocationInfo]);
+  }, [location, changeLocationInfo]);
 
   function changeOpen() {
     setOpen((prev) => !prev);
@@ -49,7 +48,6 @@ function useDropdown() {
 
   return {
     isOpen,
-    isLoading: !hasHydrated,
     location,
     locationList,
     changeOpen,
