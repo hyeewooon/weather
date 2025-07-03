@@ -23,6 +23,36 @@ const locationList: LocationInfo[] = [
     lat: 35.21,
     lng: 129.0689,
   },
+  {
+    id: 'daegu',
+    cityName: '대구광역시',
+    lat: 35.8703,
+    lng: 128.5911,
+  },
+  {
+    id: 'gwangju',
+    cityName: '광주광역시',
+    lat: 35.1547,
+    lng: 126.9156,
+  },
+  {
+    id: 'daejeon',
+    cityName: '대전광역시',
+    lat: 36.3214,
+    lng: 127.4197,
+  },
+  {
+    id: 'ulsan',
+    cityName: '울산광역시',
+    lat: 35.5372,
+    lng: 129.3167,
+  },
+  {
+    id: 'jeju',
+    cityName: '제주특별자치도',
+    lat: 33.4996,
+    lng: 126.5312,
+  },
 ];
 
 function useDropdown() {
